@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private Location location;
     private float speed;
     TextView speedView;
-
+    TextView altView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         speedView = (TextView)findViewById(R.id.speed);
         speedView.setTextColor(Color.WHITE);
         speedView.setScaleY(-1);
+
+        altView = (TextView)findViewById(R.id.altitude);
+        altView.setTextColor(Color.WHITE);
+        altView.setScaleY(-1);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         WindowManager.LayoutParams params = getWindow().getAttributes();
@@ -89,11 +93,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         speedView = (TextView)findViewById(R.id.speed);
 
         if (location == null){
-            speedView.setText("No Speed");
+            speedView.setText("...");
         }else{
             float currentSpeedMS = location.getSpeed();
+            double altM = location.getAltitude ();
             int currentSpeedMPH = (int)(currentSpeedMS*(float)2.2364);
+            int currentAltF = (int)(altM*(float)0.3048);
             speedView.setText(Integer.toString(currentSpeedMPH));
+            altView.setText(Integer.toString(currentAltF));
+
         }
     }
 
