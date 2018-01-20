@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     LocationListener li;
     private Location location;
     private float speed;
+    private int altCorr = 50;
     TextView speedView;
     TextView altView;
     @Override
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             float currentSpeedMS = location.getSpeed();
             double altM = location.getAltitude ();
             int currentSpeedMPH = (int)(currentSpeedMS*(float)2.2364);
-            int currentAltF = (int)(altM*(float)0.3048);
+            int currentAltF = (int)((altM*(float)0.3048)+altCorr);
             speedView.setText(Integer.toString(currentSpeedMPH));
             altView.setText(Integer.toString(currentAltF));
 
